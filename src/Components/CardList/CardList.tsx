@@ -1,18 +1,35 @@
-import React, { type JSX } from 'react'
+import React, { type JSX, type SyntheticEvent } from 'react'
 import Card from '../Card/Card'
 import './CardList.css'
+import type { CompanySearch } from '../../company'
+import { v4 as uuidv4 } from 'uuid';
 
 
-interface Props {}
-
-const CardList: React.FC<Props> = (props: Props): JSX.Element => {
-  return (
-    <div className ="card-list">
-        <Card companyName ="Apple" ticker='AAPL' price={150.00} />
-        <Card companyName ="Microsoft" ticker='MSFT' price={250.00} />
-        <Card companyName ="Google" ticker='GOOGL' price={2800.00} />
-    </div>
-  )
+interface Props {
+  searchResults: CompanySearch[];
+  onPortFolioCreate: (e: SyntheticEvent) => void;
 }
+
+const CardList: React.FC<Props> = ({ searchResults, onPortFolioCreate }: Props): JSX.Element => {
+  return (
+    <>
+      {searchResults.length > 0 ? (
+        searchResults.map((result) => {
+          return (
+            <Card
+              key={result.symbol}
+              id={result.symbol}
+              searchResult={result}
+              onPortFolioCreate={onPortFolioCreate}
+            />
+          );
+        })
+      ) : (
+        <h2>No Results Found</h2>
+      )}
+    </>
+  );
+};
+
 
 export default CardList

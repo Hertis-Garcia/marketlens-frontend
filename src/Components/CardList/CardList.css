@@ -1,9 +1,9 @@
 .card-list {
   display: flex;
-  gap: clamp(0.75rem, 2vw, 1.5rem);
-  width: 100%;
-  align-items: stretch;
-  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: clamp(3rem, 2vw, 2rem);
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 768px) {
